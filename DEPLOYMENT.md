@@ -56,10 +56,14 @@ https://gigflowbackend-saxu.onrender.com/api/auth/me
 Set this environment variable in your hosting platform:
 
 ```env
-VITE_API_URL=https://gigflowbackend-saxu.onrender.com/api
+VITE_API_URL=https://gigflowbackend-saxu.onrender.com
 ```
 
-**IMPORTANT**: Must include `/api` at the end!
+**✅ NEW: The code now automatically adds `/api` suffix if missing!**
+
+You can set it either way:
+- `https://gigflowbackend-saxu.onrender.com` ✅ (will become `/api` automatically)
+- `https://gigflowbackend-saxu.onrender.com/api` ✅ (already includes `/api`)
 
 ### Platform-Specific Instructions:
 
@@ -67,14 +71,14 @@ VITE_API_URL=https://gigflowbackend-saxu.onrender.com/api
 1. Go to Project Settings → Environment Variables
 2. Add:
    - Key: `VITE_API_URL`
-   - Value: `https://gigflowbackend-saxu.onrender.com/api`
+   - Value: `https://gigflowbackend-saxu.onrender.com`
 3. Redeploy the project
 
 #### **Netlify:**
 1. Go to Site Settings → Build & Deploy → Environment
 2. Add:
    - Key: `VITE_API_URL`
-   - Value: `https://gigflowbackend-saxu.onrender.com/api`
+   - Value: `https://gigflowbackend-saxu.onrender.com`
 3. Trigger new deploy
 
 ---
@@ -83,14 +87,24 @@ VITE_API_URL=https://gigflowbackend-saxu.onrender.com/api
 
 ### Issue: Frontend calls `/gigs` instead of `/api/gigs`
 
-**Cause**: `VITE_API_URL` environment variable not set in production
+**✅ FIXED**: The code now automatically ensures all API calls include `/api` prefix
 
-**Solution**:
+**How it works**:
+```javascript
+// api.js automatically adds /api if missing
+const getBaseURL = () => {
+  const envURL = import.meta.env.VITE_API_URL;
+  if (envURL) {
+    return envURL.endsWith('/api') ? envURL : `${envURL}/api`;
+  }
+  return '/api';
+};
+```
+
+**You can now set either**:
 ```env
-# ❌ WRONG
+# Both work correctly now
 VITE_API_URL=https://gigflowbackend-saxu.onrender.com
-
-# ✅ CORRECT
 VITE_API_URL=https://gigflowbackend-saxu.onrender.com/api
 ```
 

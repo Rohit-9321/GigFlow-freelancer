@@ -5,6 +5,16 @@ import { addGig } from '../store/gigSlice';
 
 let socket = null;
 
+// Get Socket URL from environment (remove /api suffix if present)
+const getSocketURL = () => {
+  const envURL = import.meta.env.VITE_API_URL;
+  if (envURL) {
+    // Remove /api suffix for socket connection
+    return envURL.replace(/\/api$/, '');
+  }
+  return 'http://localhost:5000';
+};
+
 // Socket authentication now relies on HttpOnly cookie; no token is passed from client
 export const connectSocket = () => {
   if (socket) {
@@ -12,7 +22,7 @@ export const connectSocket = () => {
     return socket;
   }
 
-  const socketURL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5000';
+  const socketURL = getSocketURL();
   
   console.log('Connecting to socket server:', socketURL);
   

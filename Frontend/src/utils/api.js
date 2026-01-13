@@ -1,10 +1,21 @@
 import axios from 'axios';
 
+// Ensure baseURL always includes /api prefix
+const getBaseURL = () => {
+  const envURL = import.meta.env.VITE_API_URL;
+  
+  // If VITE_API_URL is set, use it (should include /api)
+  if (envURL) {
+    // If it doesn't end with /api, add it
+    return envURL.endsWith('/api') ? envURL : `${envURL}/api`;
+  }
+  
+  // Development: use proxy
+  return '/api';
+};
+
 const api = axios.create({
-  // In production: VITE_API_URL should be full backend URL with /api prefix
-  // Example: https://gigflowbackend-saxu.onrender.com/api
-  // In development: Uses proxy to /api
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: getBaseURL(),
   withCredentials: true
 });
 
