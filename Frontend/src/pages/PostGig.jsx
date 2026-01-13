@@ -29,53 +29,57 @@ const PostGig = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.title || !formData.description || !formData.budget) {
+    const title = formData.title.trim();
+    const description = formData.description.trim();
+    const budget = parseInt(String(formData.budget).trim(), 10);
+
+    if (!title || !description || String(formData.budget).trim() === '') {
       toast.error('Please fill in all fields');
       return;
     }
 
-    if (formData.budget <= 0) {
-      toast.error('Budget must be greater than 0');
+    if (Number.isNaN(budget) || budget <= 0) {
+      toast.error('Budget must be a valid number greater than 0');
       return;
     }
 
     try {
       await dispatch(createGig({
-        title: formData.title,
-        description: formData.description,
-        budget: Number(formData.budget)
+        title,
+        description,
+        budget
       })).unwrap();
       
       toast.success('Gig posted successfully!');
-      navigate('/');
+      navigate('/my-gigs');
     } catch (error) {
       // Error is handled by useEffect
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/20 py-6 sm:py-12 px-4 sm:px-6 lg:px-12">
+    <div className="min-h-screen bg-gray-50 py-6 sm:py-12 px-4 sm:px-6 lg:px-12">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
-          <div className="inline-flex items-center justify-center w-12 sm:w-16 h-12 sm:h-16 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl sm:rounded-2xl mb-3 sm:mb-4 shadow-lg">
+          <div className="inline-flex items-center justify-center w-12 sm:w-16 h-12 sm:h-16 bg-gray-800 rounded-lg sm:rounded-xl mb-3 sm:mb-4 shadow-sm">
             <svg className="w-6 sm:w-8 h-6 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-1 sm:mb-2">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">
             Post a New Project
           </h2>
-          <p className="text-sm sm:text-base text-slate-600">
+          <p className="text-sm sm:text-base text-gray-600">
             Share your project details and connect with talented freelancers
           </p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-8">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Project Title
               </label>
               <input
@@ -85,12 +89,13 @@ const PostGig = () => {
                 onChange={handleChange}
                 className="input-base"
                 placeholder="e.g., Build a responsive landing page with React"
+                required
               />
-              <p className="text-sm text-slate-500 mt-2">Be specific and descriptive to attract the right freelancers</p>
+             
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Project Description
               </label>
               <textarea
@@ -99,21 +104,15 @@ const PostGig = () => {
                 onChange={handleChange}
                 rows="8"
                 className="input-base resize-none"
-                placeholder="Describe your project in detail:
-• What needs to be built or accomplished?
-• What are the main requirements?
-• Are there any specific technologies or tools required?
-• What is the expected timeline?
-• Any other relevant details..."
+                placeholder="Describe your project in detail:"
+                required
               />
-              <p className="text-sm text-slate-500 mt-2">
-                Tip: Provide clear requirements and expectations to receive better proposals
-              </p>
+          
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">
-                Project Budget (₹)
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Project Budget ($)
               </label>
               <div className="relative">
                 <input
@@ -124,11 +123,11 @@ const PostGig = () => {
                   className="input-base text-lg"
                   placeholder="0.00"
                   min="1"
+                  step="1"
+                  required
                 />
               </div>
-              <p className="text-sm text-slate-500 mt-2">
-                Set a competitive budget to attract top freelancers
-              </p>
+              
             </div>
 
             <div className="flex gap-4 pt-4">
@@ -164,24 +163,7 @@ const PostGig = () => {
             </div>
           </form>
         </div>
-
-        {/* Info Card */}
-        <div className="mt-6 bg-indigo-50 border border-indigo-200 rounded-xl p-6">
-          <div className="flex items-start space-x-3">
-            <svg className="w-6 h-6 text-indigo-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <div>
-              <h3 className="font-semibold text-indigo-900 mb-2">What happens next?</h3>
-              <ul className="text-sm text-indigo-800 space-y-1">
-                <li>• Your project will be visible to all freelancers on the platform</li>
-                <li>• Freelancers will submit proposals with their approach and pricing</li>
-                <li>• You can review proposals and hire the best fit for your project</li>
-                <li>• You'll be notified via real-time notifications when freelancers submit bids</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      
       </div>
     </div>
   );

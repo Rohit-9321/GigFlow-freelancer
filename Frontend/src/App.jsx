@@ -7,6 +7,7 @@ import { getMe } from './store/authSlice';
 import { connectSocket } from './utils/socket';
 
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import ProtectedRoute from './components/ProtectedRoute';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -50,14 +51,14 @@ function AppContent() {
   // Show loading only during initial auth check
   if (!authChecked) {
     return (
-      <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/20">
+      <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50">
         <div className="relative">
-          <div className="w-20 h-20 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full flex items-center justify-center">
-            <span className="text-white font-bold text-lg">G</span>
+          <div className="w-20 h-20 border-4 border-gray-200 border-t-gray-800 rounded-full animate-spin"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <img src="/logo.jpeg" alt="GigFlow" className="h-12 w-auto" />
           </div>
         </div>
-        <p className="mt-6 text-lg font-medium text-slate-700">Loading GigFlow...</p>
+        <p className="mt-6 text-lg font-medium text-gray-700">Loading GigFlow...</p>
       </div>
     );
   }
@@ -104,6 +105,8 @@ function AppContent() {
         <Route path="/gig/:id" element={<GigDetail />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      
+      <Footer />
     </BrowserRouter>
   );
 }

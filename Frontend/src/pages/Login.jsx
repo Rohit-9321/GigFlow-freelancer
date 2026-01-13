@@ -48,26 +48,26 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/20 flex items-center justify-center py-6 sm:py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-6 sm:py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
-          <div className="inline-flex items-center justify-center w-12 sm:w-16 h-12 sm:h-16 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl sm:rounded-2xl mb-3 sm:mb-4 shadow-lg">
-            <span className="text-xl sm:text-2xl font-bold text-white">G</span>
+          <div className="inline-flex items-center justify-center mb-3 sm:mb-4">
+            <img src="/logo.jpeg" alt="GigFlow Logo" className="h-16 sm:h-20 w-auto" />
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-1 sm:mb-2">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">
             Welcome Back
           </h2>
-          <p className="text-sm sm:text-base text-slate-600">
+          <p className="text-sm sm:text-base text-gray-600">
             Login to continue to GigFlow
           </p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-8">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Email Address
               </label>
               <input
@@ -81,7 +81,7 @@ const Login = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Password
               </label>
               <input
@@ -111,10 +111,10 @@ const Login = () => {
             </button>
           </form>
 
-          <div className="mt-6 pt-6 border-t border-slate-200">
-            <p className="text-center text-sm text-slate-600">
+          <div className="mt-6 pt-6 border-t border-gray-200">
+            <p className="text-center text-sm text-gray-600">
               Don't have an account?{' '}
-              <Link to="/register" className="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors">
+              <Link to="/register" className="font-semibold text-gray-800 hover:text-gray-900 transition-colors">
                 Create account
               </Link>
             </p>

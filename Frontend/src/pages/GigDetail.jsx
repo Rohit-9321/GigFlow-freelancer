@@ -137,23 +137,23 @@ const GigDetail = () => {
 
   if (gigLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/20 flex flex-col items-center justify-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-4 border-indigo-200 border-t-indigo-600 mb-4"></div>
-        <p className="text-slate-600 text-lg">Loading project details...</p>
+      <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-4 border-gray-200 border-t-gray-800 mb-4"></div>
+        <p className="text-gray-600 text-lg">Loading project details...</p>
       </div>
     );
   }
 
   if (!currentGig) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/20 flex flex-col items-center justify-center">
-        <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mb-4">
-          <svg className="w-10 h-10 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center">
+        <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+          <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </div>
-        <h2 className="text-2xl font-bold text-slate-900 mb-2">Project Not Found</h2>
-        <p className="text-slate-600 mb-6">The project you're looking for doesn't exist</p>
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">Project Not Found</h2>
+        <p className="text-gray-600 mb-6">The project you're looking for doesn't exist</p>
         <button
           onClick={() => navigate('/')}
           className="btn-primary"
@@ -165,12 +165,12 @@ const GigDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/20 py-6 sm:py-8 px-4 sm:px-6 lg:px-12">
+    <div className="min-h-screen bg-gray-50 py-6 sm:py-8 px-4 sm:px-6 lg:px-12">
       <div className="max-w-[1200px] mx-auto">
         {/* Back button */}
         <button
           onClick={() => navigate('/')}
-          className="mb-4 sm:mb-6 flex items-center space-x-2 text-slate-600 hover:text-indigo-600 transition-colors font-medium text-sm sm:text-base"
+          className="mb-4 sm:mb-6 flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors font-medium text-sm sm:text-base"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -179,20 +179,20 @@ const GigDetail = () => {
         </button>
 
         {/* Gig Details */}
-        <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 mb-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 mb-6">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-6">
             <div className="flex-1">
-              <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-3">
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
                 {currentGig.title}
               </h1>
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2">
-                  <div className="w-10 h-10 bg-gradient-to-br from-indigo-400 to-purple-400 rounded-full flex items-center justify-center text-white font-semibold">
+                  <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-white font-semibold">
                     {ownerName ? ownerName.charAt(0).toUpperCase() : ''}
                   </div>
                   <div>
-                    <p className="text-sm text-slate-500">Posted by</p>
-                    <p className="font-semibold text-slate-700">
+                    <p className="text-sm text-gray-500">Posted by</p>
+                    <p className="font-semibold text-gray-700">
                       {ownerName || 'Unknown'}
                     </p>
                   </div>
@@ -202,28 +202,28 @@ const GigDetail = () => {
             <span className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold ${
               currentGig.status === 'open' 
                 ? 'bg-emerald-100 text-emerald-700' 
-                : 'bg-slate-100 text-slate-700'
+                : 'bg-gray-100 text-gray-700'
             }`}>
               <span className={`w-2 h-2 rounded-full mr-2 ${
-                currentGig.status === 'open' ? 'bg-emerald-500' : 'bg-slate-500'
+                currentGig.status === 'open' ? 'bg-emerald-500' : 'bg-gray-500'
               }`}></span>
               {currentGig.status === 'open' ? 'Open for Bids' : 'Assigned'}
             </span>
           </div>
 
           <div className="mb-6">
-            <h2 className="text-lg font-semibold text-slate-900 mb-3">Project Description</h2>
-            <p className="text-slate-600 whitespace-pre-wrap leading-relaxed">
+            <h2 className="text-lg font-semibold text-gray-900 mb-3">Project Description</h2>
+            <p className="text-gray-600 whitespace-pre-wrap leading-relaxed">
               {currentGig.description}
             </p>
           </div>
 
-          <div className="pt-6 border-t border-slate-200">
+          <div className="pt-6 border-t border-gray-200">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-slate-500 mb-1">Project Budget</p>
-                  <p className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                  ₹{currentGig.budget ? Number(currentGig.budget).toLocaleString() : '0'}
+                <p className="text-sm text-gray-500 mb-1">Project Budget</p>
+                  <p className="text-4xl font-bold text-gray-900">
+                  ${currentGig.budget ? Number(currentGig.budget).toLocaleString() : '0'}
                 </p>
               </div>
             </div>
@@ -232,18 +232,18 @@ const GigDetail = () => {
 
         {/* Bid Form for Non-owners */}
         {canBid && (
-          <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 mb-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 mb-6">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-slate-900">
+                <h2 className="text-2xl font-bold text-gray-900">
                   Submit Your Proposal
                 </h2>
-                <p className="text-slate-600">Show the client why you're the best fit</p>
+                <p className="text-gray-600">Show the client why you're the best fit</p>
               </div>
             </div>
 
@@ -257,7 +257,7 @@ const GigDetail = () => {
             ) : (
               <form onSubmit={handleBidSubmit} className="space-y-5">
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Your Proposal
                   </label>
                   <textarea
@@ -270,8 +270,8 @@ const GigDetail = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">
-                    Your Bid Amount (₹)
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Your Bid Amount ($)
                   </label>
                   <div className="relative">
                     <input
@@ -283,7 +283,7 @@ const GigDetail = () => {
                       min="1"
                     />
                   </div>
-                  <p className="text-sm text-slate-500 mt-2">Project budget: ₹{currentGig.budget ? Number(currentGig.budget).toLocaleString() : '0'}</p>
+                  <p className="text-sm text-gray-500 mt-2">Project budget: ${currentGig.budget ? Number(currentGig.budget).toLocaleString() : '0'}</p>
                 </div>
 
                 <div className="flex gap-3 pt-2">
@@ -335,34 +335,34 @@ const GigDetail = () => {
 
         {/* Bids List for Owner */}
         {isOwner && (
-          <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-8">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center">
                   <svg className="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-slate-900">
+                  <h2 className="text-2xl font-bold text-gray-900">
                     Proposals Received
                   </h2>
-                  <p className="text-slate-600">{(bids || []).length} freelancer{(bids || []).length !== 1 ? 's' : ''} interested</p>
+                  <p className="text-gray-600">{(bids || []).length} freelancer{(bids || []).length !== 1 ? 's' : ''} interested</p>
                 </div>
               </div>
             </div>
 
             {bidLoading && (
               <div className="flex flex-col items-center justify-center py-12">
-                <div className="animate-spin rounded-full h-12 w-12 border-4 border-indigo-200 border-t-indigo-600 mb-4"></div>
-                <p className="text-slate-600">Loading proposals...</p>
+                <div className="animate-spin rounded-full h-12 w-12 border-4 border-gray-200 border-t-gray-800 mb-4"></div>
+                <p className="text-gray-600">Loading proposals...</p>
               </div>
             )}
 
             {!bidLoading && (bids || []).length === 0 && (
               <div className="text-center py-12">
-                <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                   </svg>
                 </div>
@@ -377,40 +377,40 @@ const GigDetail = () => {
               {(bids || []).map((bid) => (
                 <div
                   key={bid._id}
-                  className={`border-2 rounded-xl p-6 transition-all ${
+                  className={`border-2 rounded-lg p-6 transition-all ${
                     bid.status === 'hired' 
                       ? 'border-emerald-300 bg-emerald-50' 
                       : bid.status === 'rejected'
-                      ? 'border-slate-200 bg-slate-50 opacity-60'
-                      : 'border-slate-200 bg-white hover:border-indigo-200 hover:shadow-md'
+                      ? 'border-gray-200 bg-gray-50 opacity-60'
+                      : 'border-gray-200 bg-white hover:border-gray-400 hover:shadow'
                   }`}
                 >
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-4">
                     <div className="flex items-start space-x-3 flex-1">
-                      <div className="w-12 h-12 bg-gradient-to-br from-indigo-400 to-purple-400 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                      <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
                         {((bid.freelancerId && bid.freelancerId.name) ? bid.freelancerId.name.charAt(0).toUpperCase() : (typeof bid.freelancerId === 'string' ? bid.freelancerId.charAt(0).toUpperCase() : ''))}
                       </div>
                       <div className="flex-1">
-                        <h3 className="font-bold text-lg text-slate-900">
+                        <h3 className="font-bold text-lg text-gray-900">
                           {bid.freelancerId?.name ?? (typeof bid.freelancerId === 'string' ? bid.freelancerId : 'Unknown')}
                         </h3>
-                        <p className="text-sm text-slate-500">
+                        <p className="text-sm text-gray-500">
                           {bid.freelancerId?.email ?? ''}
                         </p>
                       </div>
                     </div>
                     <div className="flex sm:flex-col items-start sm:items-end gap-3">
                       <div className="text-left sm:text-right">
-                        <p className="text-sm text-slate-500 mb-1">Bid Amount</p>
-                        <p className="text-2xl font-bold text-indigo-600">
-                          ₹{bid.price.toLocaleString()}
+                        <p className="text-sm text-gray-500 mb-1">Bid Amount</p>
+                        <p className="text-2xl font-bold text-gray-900">
+                          ${bid.price.toLocaleString()}
                         </p>
                       </div>
                       <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${
                         bid.status === 'hired' 
                           ? 'bg-emerald-100 text-emerald-700' 
                           : bid.status === 'rejected'
-                          ? 'bg-slate-200 text-slate-600'
+                          ? 'bg-gray-200 text-gray-600'
                           : 'bg-amber-100 text-amber-700'
                       }`}>
                         {bid.status === 'hired' && '✓ '}
@@ -420,8 +420,8 @@ const GigDetail = () => {
                   </div>
 
                   <div className="mb-4">
-                    <h4 className="text-sm font-semibold text-slate-700 mb-2">Proposal</h4>
-                    <p className="text-slate-600 whitespace-pre-wrap leading-relaxed bg-slate-50 rounded-lg p-4 border border-slate-100">
+                    <h4 className="text-sm font-semibold text-gray-700 mb-2">Proposal</h4>
+                    <p className="text-gray-600 whitespace-pre-wrap leading-relaxed bg-gray-50 rounded-lg p-4 border border-gray-100">
                       {bid.message}
                     </p>
                   </div>

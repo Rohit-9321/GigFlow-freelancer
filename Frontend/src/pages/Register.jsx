@@ -9,7 +9,8 @@ const Register = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    password: ''
+    password: '',
+    confirmPassword: ''
   });
 
   const dispatch = useDispatch();
@@ -29,13 +30,18 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!formData.name || !formData.email || !formData.password) {
+    if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
       toast.error('Please fill in all fields');
       return;
     }
 
     if (formData.password.length < 6) {
       toast.error('Password must be at least 6 characters');
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      toast.error('Passwords do not match');
       return;
     }
 
@@ -54,26 +60,26 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/20 flex items-center justify-center py-6 sm:py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-6 sm:py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
-          <div className="inline-flex items-center justify-center w-12 sm:w-16 h-12 sm:h-16 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl sm:rounded-2xl mb-3 sm:mb-4 shadow-lg">
-            <span className="text-xl sm:text-2xl font-bold text-white">G</span>
+          <div className="inline-flex items-center justify-center mb-3 sm:mb-4">
+            <img src="/logo.jpeg" alt="GigFlow Logo" className="h-16 sm:h-20 w-auto" />
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-1 sm:mb-2">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">
             Create Account
           </h2>
-          <p className="text-sm sm:text-base text-slate-600">
+          <p className="text-sm sm:text-base text-gray-600">
             Join GigFlow and start earning today
           </p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-8">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Full Name
               </label>
               <input
@@ -87,7 +93,7 @@ const Register = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Email Address
               </label>
               <input
@@ -101,13 +107,27 @@ const Register = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Password
               </label>
               <input
                 type="password"
                 name="password"
                 value={formData.password}
+                onChange={handleChange}
+                className="input-base"
+                placeholder="••••••••"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
                 onChange={handleChange}
                 className="input-base"
                 placeholder="••••••••"
@@ -131,10 +151,10 @@ const Register = () => {
             </button>
           </form>
 
-          <div className="mt-6 pt-6 border-t border-slate-200">
-            <p className="text-center text-sm text-slate-600">
+          <div className="mt-6 pt-6 border-t border-gray-200">
+            <p className="text-center text-sm text-gray-600">
               Already have an account?{' '}
-              <Link to="/login" className="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors">
+              <Link to="/login" className="font-semibold text-gray-800 hover:text-gray-900 transition-colors">
                 Sign in
               </Link>
             </p>

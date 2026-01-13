@@ -6,9 +6,9 @@ const ProtectedRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/20">
-        <div className="animate-spin rounded-full h-16 w-16 border-4 border-indigo-200 border-t-indigo-600 mb-4"></div>
-        <p className="text-lg font-medium text-slate-700">Verifying access...</p>
+      <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50">
+        <div className="animate-spin rounded-full h-16 w-16 border-4 border-gray-200 border-t-gray-800 mb-4"></div>
+        <p className="text-lg font-medium text-gray-700">Verifying access...</p>
       </div>
     );
   }

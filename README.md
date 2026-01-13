@@ -271,4 +271,4 @@ ISC
 
 ---
 
-Built with ❤️ following industry best practices and SOLID principles.
+
