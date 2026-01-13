@@ -124,7 +124,7 @@ gigflow/
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/Rohit-9321/GigFlow-freelancer.git
 cd gigflow
 ```
 
