@@ -124,7 +124,7 @@ gigflow/
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/Rohit-9321/GigFlow-freelancer.git
 cd gigflow
 ```
 
@@ -252,126 +252,7 @@ Prevents race conditions when multiple users try to hire simultaneously:
 - **Viewport meta tag**: Proper scaling on mobile devices
 - **Mobile menu**: Hamburger navigation for small screens
 
-### 3. Live Search with Debouncing
-
-- **Debounced input**: 300ms delay to reduce API calls
-- **Real-time results**: Updates as user types
-- **MongoDB text search**: Case-insensitive search on gig titles
-
-### 4. State Management
-
-- **Redux Toolkit**: Centralized state with slices
-- **Async Thunks**: Handle API calls with loading/error states
-- **Persistent Auth**: Check authentication on app load
-
-## 📱 Mobile & Web Support
-
-This application is **fully responsive** and optimized for:
-- 📱 Mobile phones (320px+)
-- 📱 Tablets (768px+)
-- 💻 Desktop (1024px+)
-
-**Key responsive features:**
-- Viewport meta tag for proper scaling
-- Tailwind CSS responsive breakpoints
-- Mobile-friendly navigation menu
-- Touch-optimized buttons and forms
-- Flexible grid layouts
-
-## 🚀 Deployment
-
-### Backend Deployment (e.g., Heroku, Railway, Render)
-
-1. Set environment variables:
-   - `MONGO_URI` - Your MongoDB connection string
-   - `JWT_SECRET` - Strong secret key
-   - `CLIENT_URL` - Your frontend URL
-   - `NODE_ENV=production`
-
-2. The backend is configured for proxy (`app.set('trust proxy', 1)`)
-
-### Frontend Deployment (e.g., Vercel, Netlify)
-
-1. Build the project:
-   ```bash
-   npm run build
-   ```
-
-2. Update API URL in `Frontend/src/utils/api.js` to point to your deployed backend
-
-3. Deploy the `dist` folder
-
-## 🛠️ Development Tips
-
-### Running Both Servers
-
-Use two terminal windows:
-```bash
-# Terminal 1 - Backend
-cd Backend
-npm run dev
-
-# Terminal 2 - Frontend
-cd Frontend
-npm run dev
-```
-
-### Database Management
-
-View your MongoDB data:
-```bash
-mongosh
-use gigflow
-db.users.find()
-db.gigs.find()
-db.bids.find()
-```
-
-### Testing Real-time Notifications
-
-1. Open app in two browser windows (different users)
-2. User A posts a gig
-3. User B submits a bid
-4. User A hires User B
-5. User B receives instant notification 🔔
-
-## 📝 Future Enhancements
-
-- [ ] File upload for gig attachments
-- [ ] User profiles with ratings and reviews
-- [ ] Message system between users
-- [ ] Payment integration
-- [ ] Advanced filtering (category, budget range, date)
-- [ ] Email notifications
-- [ ] Admin dashboard
-- [ ] Gig categories/tags
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 👤 Author
-
-Your Name - [GitHub Profile](https://github.com/yourusername)
-
-## 🙏 Acknowledgments
-
-- React & Redux documentation
-- Tailwind CSS for utility classes
-- Socket.io for real-time features
-- MongoDB for flexible data modeling
-
----
-
-**Built with ❤️ using React, Node.js, MongoDB, and Socket.io**
+**Built with  using React, Node.js, MongoDB, and Socket.io**
 4. Updates all other bids to "rejected"
 
 If two hire requests occur simultaneously, only one succeeds - the transaction guarantees atomicity.
@@ -401,56 +282,5 @@ The app uses behavior-based access control:
 5. **Hire the freelancer** - notice the real-time notification
 6. **Verify atomic behavior** - all other bids are automatically rejected
 
-## 🚧 Production Deployment
-
-### Backend
-
-1. Set environment variables:
-   - `MONGO_URI` - Production MongoDB connection string
-   - `JWT_SECRET` - Strong random secret
-   - `CLIENT_URL` - Production frontend URL
-   - `NODE_ENV=production`
-
-2. Ensure MongoDB supports transactions (replica set or Atlas)
-
-### Frontend
-
-1. Build the production bundle:
-   ```bash
-   npm run build
-   ```
-
-2. Update API URL in `src/utils/api.js` for production
-
-3. Deploy to platforms like Vercel, Netlify, or serve with Nginx
-
-## 📝 License
-
-ISC
-
-## 👨‍💻 Developer Notes
-
-- MongoDB transactions require a replica set (use MongoDB Atlas for easy setup)
-- Socket.io authentication uses JWT token passed from client
-- Redux Toolkit used for clean, maintainable state management
-- Tailwind CSS for rapid UI development
-- Vite for fast development experience
-
-## 🐛 Troubleshooting
-
-**Socket not connecting:**
-- Ensure backend is running on port 5000
-- Check CORS settings match CLIENT_URL
-
-**Transactions failing:**
-- Verify MongoDB is running as replica set
-- Use MongoDB Atlas (supports transactions by default)
-
-**Cookies not being set:**
-- Check `withCredentials: true` in axios config
-- Verify CORS origin matches exactly
-- Ensure sameSite and secure cookie settings
-
----
 
 
