@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
 import { store } from './store/store';
@@ -48,6 +48,17 @@ function AppContent() {
     checkAuth();
   }, [dispatch]);
 
+  // Ensure socket connects whenever auth becomes true (e.g., after login)
+  useEffect(() => {
+    if (isAuthenticated) {
+      try {
+        connectSocket();
+      } catch (e) {
+        console.error('Socket connect on auth change failed:', e);
+      }
+    }
+  }, [isAuthenticated]);
+
   // Show loading only during initial auth check
   if (!authChecked) {
     return (
@@ -64,7 +75,7 @@ function AppContent() {
   }
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Navbar />
       <Toaster position="top-right" />
       
@@ -107,7 +118,7 @@ function AppContent() {
       </Routes>
       
       <Footer />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
