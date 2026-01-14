@@ -57,6 +57,18 @@ const gigSlice = createSlice({
     },
     clearCurrentGig: (state) => {
       state.currentGig = null;
+    },
+    updateGigStatus: (state, action) => {
+      // Update a gig's status in the list
+      const { gigId, status } = action.payload;
+      const gig = state.gigs.find(g => g._id === gigId);
+      if (gig) {
+        gig.status = status;
+      }
+      // Also update currentGig if it matches
+      if (state.currentGig && state.currentGig._id === gigId) {
+        state.currentGig.status = status;
+      }
     }
   },
   extraReducers: (builder) => {
@@ -103,6 +115,5 @@ const gigSlice = createSlice({
   }
 });
 
-export const { clearError, clearCurrentGig } = gigSlice.actions;
-export const { addGig } = gigSlice.actions;
+export const { clearError, clearCurrentGig, addGig, updateGigStatus } = gigSlice.actions;
 export default gigSlice.reducer;

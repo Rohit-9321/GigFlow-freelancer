@@ -1,7 +1,7 @@
 import { io } from 'socket.io-client';
 import toast from 'react-hot-toast';
 import { store } from '../store/store';
-import { addGig } from '../store/gigSlice';
+import { addGig, updateGigStatus } from '../store/gigSlice';
 
 let socket = null;
 
@@ -45,6 +45,10 @@ export const connectSocket = () => {
       duration: 5000,
       position: 'top-right'
     });
+    // Update gig status to "assigned" in Redux
+    if (data.gigId) {
+      store.dispatch(updateGigStatus({ gigId: data.gigId, status: 'assigned' }));
+    }
   });
 
   socket.on('new_bid', (data) => {
@@ -62,6 +66,10 @@ export const connectSocket = () => {
         duration: 4000,
         position: 'top-right'
       });
+    }
+    // Update gig status to "assigned" in Redux when notified of other assignments
+    if (data.gigId) {
+      store.dispatch(updateGigStatus({ gigId: data.gigId, status: 'assigned' }));
     }
   });
 
