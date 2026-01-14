@@ -71,16 +71,36 @@ const GigDetail = () => {
     };
   }, [currentGig, isOwner, id, dispatch]);
 
+  // Real-time socket listener for hire events
+  useEffect(() => {
+    const socket = getSocket();
+    if (!socket || !currentGig) return;
+
+    const handleHiredNotification = (data) => {
+      console.log('Someone was hired:', data);
+      // Refresh bids if owner (to see updated bid statuses)
+      if (isOwner && String(data.gigId) === String(currentGig._id)) {
+        dispatch(fetchBidsForGig(id));
+      }
+    };
+
+    socket.on('hired_notification', handleHiredNotification);
+
+    return () => {
+      socket.off('hired_notification', handleHiredNotification);
+    };
+  }, [currentGig, isOwner, id, dispatch]);
+
   // Real-time socket listener for gig updates (when someone gets hired)
   useEffect(() => {
     const socket = getSocket();
     if (!socket || !currentGig) return;
 
-    const handleGigUpdate = () => {
-      console.log('Gig status updated, refreshing...');
-      // Refresh gig details
-      dispatch(fetchGigById(id));
-      if (isOwner) {
+    const handleGigUpdate = (data) => {
+      console.log('Gig update received:', data);
+      // Redux state is already updated by socket.js
+      // Just refresh bids if user is owner
+      if (isOwner && String(data.gigId) === String(currentGig._id)) {
         dispatch(fetchBidsForGig(id));
       }
     };
